@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мир миньонов</title>
+    <style>
+        /* CSS стили */
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #FFDE59;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        h1 {
+            color: #3A5E8C;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .minion {
+            width: 200px;
+            transition: transform 0.3s;
+            margin: 20px;
+        }
+        
+        .minion:hover {
+            transform: scale(1.1);
+        }
+        
+        button {
+            background-color: #3A5E8C;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        
+        button:hover {
+            background-color: #2C4A6E;
+        }
+        
+        #minionSpeech {
+            font-size: 24px;
+            font-weight: bold;
+            color: #3A5E8C;
+            height: 40px;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Добро пожаловать в мир миньонов!</h1>
+    </header>
+    
+    <main>
+        <img src="https://static.wikia.nocookie.net/ideas/images/4/4a/Kevinminion.jpg" alt="Миньон" class="minion" id="minionImage">
+        
+        <div>
+            <button onclick="changeMinion()">Сменить миньона</button>
+            <button onclick="speakMinion()">Что скажет миньон?</button>
+            <button onclick="danceMinion()">Заставить танцевать</button>
+        </div>
+        
+        <p id="minionSpeech">Банана?</p>
+    </main>
+    
+    <footer>
+        <p>© 2023 Мир миньонов. Все права защищены.</p>
+    </footer>
+    
+    <script>
+        // JavaScript функции
+        const minionImages = [
+            "https://i.pinimg.com/736x/db/63/98/db63987d5dba2c707e44d8a2bc5dd188.jpg",
+            "https://avatars.mds.yandex.net/i?id=dea42a059264367a733c1a8baaabeae4d2183622-5025855-images-thumbs&n=13",
+            "https://avatars.mds.yandex.net/i?id=ab841214b131a7e813d3f83f8f176286b97df739-4220100-images-thumbs&n=13",
+            "https://i.pinimg.com/originals/a5/55/7f/a5557f67cc15837fa3fb24ec684c96c2.jpg"
+        ];
+        
+        const minionPhrases = [
+            "Банана!",
+            "Папайя!",
+            "Тутуту!",
+            "Гелко!",
+            "Поха поха!",
+            "Миака миака!",
+            "Ла ла ла!",
+            "Белло!"
+        ];
+        
+        function changeMinion() {
+            const randomIndex = Math.floor(Math.random() * minionImages.length);
+            document.getElementById('minionImage').src = minionImages[randomIndex];
+            document.getElementById('minionSpeech').textContent = "Ой!";
+        }
+        
+        function speakMinion() {
+            const randomIndex = Math.floor(Math.random() * minionPhrases.length);
+            document.getElementById('minionSpeech').textContent = minionPhrases[randomIndex];
+        }
+        
+        function danceMinion() {
+            const minion = document.getElementById('minionImage');
+            minion.style.animation = 'none';
+            void minion.offsetWidth; // Trigger reflow
+            minion.style.animation = 'dance 0.5s infinite alternate';
+            document.getElementById('minionSpeech').textContent = "Я танцую!";
+            
+            setTimeout(() => {
+                minion.style.animation = 'none';
+            }, 3000);
+        }
+        
+        // Добавляем стиль для анимации танца
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes dance {
+                from { transform: rotate(-10deg) translateY(-10px); }
+                to { transform: rotate(10deg) translateY(10px); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
